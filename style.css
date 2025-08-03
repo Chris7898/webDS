@@ -1,0 +1,144 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Container */
+  .ds-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Header */
+  .ds-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .status-indicators {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .red { background-color: #d62828; }
+  .green { background-color: #2a9d8f; }
+  .gray { background-color: #555; }
+  .blue { background-color: #0077b6; }
+  .yellow { background-color: #f4a261; color: black; }
+  .purple { background-color: #9d4edd; }
+  
+  /* Main Panels */
+  .ds-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .panel {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Buttons */
+  .button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .btn.primary { background-color: #0077b6; }
+  .btn.green { background-color: #2a9d8f; }
+  .btn.red { background-color: #d62828; }
+  .btn.blue { background-color: #0077b6; }
+  .btn.yellow { background-color: #f4a261; color: black; }
+  .btn.purple { background-color: #9d4edd; }
+  
+  .btn:hover { opacity: 0.8; }
+  
+  /* Joystick Panel */
+  .joystick-panel {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .joystick-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  canvas {
+    background: #0f0f0f;
+    border-radius: 50%;
+    display: block;
+  }
+  
+  /* Button Grid */
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 40px);
+    grid-auto-rows: 40px;
+    gap: 8px;
+  }
+  
+  .gamepad-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: white;
+    transition: 0.2s;
+    user-select: none;
+  }
+  
+  .gamepad-button.pressed {
+    background-color: #2a9d8f;
+    transform: scale(1.1);
+  }
+  
