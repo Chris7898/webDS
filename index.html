@@ -2,68 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web FRC Driver Station</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="ds-container">
-    <!-- Header -->
-    <header class="ds-header">
+  <div id="driverstation">
+    <header>
       <h1>Web FRC Driver Station</h1>
-      <div class="status-indicators">
-        <span id="connection-status" class="status-badge red">Disconnected</span>
-        <span id="mode-status" class="status-badge gray">Disabled</span>
-      </div>
+      <div id="connection-status" class="status gray">Disconnected</div>
     </header>
 
-    <!-- Main Controls -->
-    <main class="ds-main">
-      <!-- Connection Panel -->
-      <section class="panel connection-panel">
-        <h2>Connection</h2>
-        <label>
-          Team Number:
-          <input type="number" id="team-number-input" min="1" />
-        </label>
-        <p>Robot IP: <span id="robot-ip">10.00.00.2</span></p>
-        <button id="connect-btn" class="btn primary">Connect</button>
-      </section>
+    <div id="team-ip-section">
+      <label for="team-number">Team Number:</label>
+      <input id="team-number" type="number" min="1" max="9999" />
+      <span id="robot-ip">IP: 0.0.0.0</span>
+    </div>
 
-      <!-- Control Panel -->
-      <section class="panel control-panel">
-        <h2>Robot Control</h2>
-        <div class="button-row">
-          <button class="btn green" id="enable-btn">Enable</button>
-          <button class="btn red" id="disable-btn">Disable</button>
-        </div>
-        <div class="button-row">
-          <button class="btn blue" data-mode="teleop">Teleop</button>
-          <button class="btn yellow" data-mode="autonomous">Autonomous</button>
-          <button class="btn purple" data-mode="test">Test</button>
-        </div>
-      </section>
-
-      <!-- Status Panel -->
-      <section class="panel status-panel">
-        <h2>Robot Status</h2>
-        <p>Battery Voltage: <span id="battery-voltage">--</span></p>
-        <p>Robot State: <span id="robot-state">Disabled</span></p>
-        <p>Mode: <span id="robot-mode">Teleop</span></p>
-      </section>
-    </main>
-
-    <!-- Joystick Panel -->
-    <section class="panel joystick-panel">
-      <h2>Joystick Preview</h2>
-      <div class="joystick-container">
-        <canvas id="joystick-canvas" width="300" height="300"></canvas>
-        <div class="button-grid" id="button-grid">
-          <!-- Buttons dynamically added -->
-        </div>
+    <div id="status-panel">
+      <div class="status-row">
+        <span>Robot State:</span>
+        <span id="robot-state">Disabled</span>
       </div>
-      <p id="joystick-status">No joystick detected</p>
-    </section>
+      <div class="status-row">
+        <span>Mode:</span>
+        <span id="robot-mode">Teleop</span>
+      </div>
+      <div class="status-row">
+        <span>Battery:</span>
+        <span id="battery-voltage">-- V</span>
+      </div>
+    </div>
+    
+    <div id="control-panel">
+      <button id="enable-button" class="btn green">Enable</button>
+      <button id="disable-button" class="btn red">Disable</button>
+      <button data-mode="teleop" class="btn mode-btn blue">Teleop</button>
+      <button data-mode="auto" class="btn mode-btn orange">Autonomous</button>
+      <button data-mode="test" class="btn mode-btn purple">Test</button>
+    </div>
+
+    <div id="joystick-section">
+      <h2>Joystick Status</h2>
+      <div id="joystick-status">No joystick detected</div>
+      <canvas id="joystick-canvas" width="250" height="250"></canvas>
+      <div id="buttons-container"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>

@@ -1,0 +1,21 @@
+{
+    "name": "web-frc-ds-backend",
+    "version": "1.0.0",
+    "description": "Local backend for Web FRC Driver Station (WebSocket + UDP relay)",
+    "main": "backend.js",
+    "scripts": {
+        "start": "node backend.js"
+    },
+    "keywords": [
+        "FRC",
+        "driver-station",
+        "websocket",
+        "udp",
+        "robotics"
+    ],
+    "author": "YourName",
+    "license": "MIT",
+    "dependencies": {
+        "ws": "^8.18.3"
+    }
+}
