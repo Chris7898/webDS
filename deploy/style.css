@@ -1,0 +1,192 @@
+/* General body and heading */
+body {
+  background-color: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h1#title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Team section */
+.team-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.team-section input {
+  width: 150px;
+  height: 35px;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #555;
+}
+
+.team-section button {
+  width: 80px;
+  height: 35px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  cursor: pointer;
+}
+
+.team-section button:hover {
+  background-color: #005fa3;
+}
+
+/* Connect / Cancel buttons */
+.connection-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.connection-buttons button {
+  width: 100px;
+  height: 35px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+#connect-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+#connect-btn:hover {
+  background-color: #218838;
+}
+
+#cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+#cancel-btn:hover {
+  background-color: #c82333;
+}
+
+/* Status panel */
+#ds-status {
+  width: 400px;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 0 10px #000;
+}
+
+#ds-status p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Flashing red for critical states */
+.flash-red {
+  animation: flash-red 1s infinite;
+}
+
+@keyframes flash-red {
+  0% { color: #ef4444; }
+  50% { color: #7f1d1d; }
+  100% { color: #ef4444; }
+}
+
+/* Control buttons (Enable / Disable / E-Stop) */
+.control-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.control-buttons button {
+  width: 120px;
+  height: 50px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#enable-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+#enable-btn:hover {
+  background-color: #218838;
+}
+
+#disable-btn {
+  background-color: #ffc107;
+  color: black;
+}
+
+#disable-btn:hover {
+  background-color: #e0a800;
+}
+
+#estop-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+#estop-btn:hover {
+  background-color: #c82333;
+}
+
+/* Mode buttons */
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.mode-buttons button {
+  width: 100px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mode-buttons button:hover {
+  background-color: #777;
+}
+
+/* Status text colors */
+.text-green-500 {
+  color: #28a745;
+}
+
+.text-yellow-500 {
+  color: #ffc107;
+}
+
+.text-red-500 {
+  color: #dc3545;
+}
+
+.font-bold {
+  font-weight: bold;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Driver Station</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Flash animation for critical status */
+    @keyframes flash-red {
+      0%   { color: #ef4444; }
+      50%  { color: #7f1d1d; }
+      100% { color: #ef4444; }
+    }
+    .flash-red {
+      animation: flash-red 1s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Web Driver Station</h1>
+
+  <!-- Team Section -->
+  <div class="team-section">
+    <input id="team-input" type="number" placeholder="Team Number">
+    <button id="set-team-btn">Set Team</button>
+  </div>
+
+  <!-- Connect / Cancel -->
+  <div class="connection-buttons">
+    <button id="connect-btn">Connect</button>
+    <button id="cancel-btn">Cancel</button>
+  </div>
+
+  <!-- Status Panel -->
+  <div id="ds-status">
+    <p id="status">Disconnected ❌</p>
+    <p id="comms">Comms: ❌</p>
+    <p id="robot-code">Code: ❌</p>
+    <p id="battery">Battery: -- V</p>
+  </div>
+
+  <!-- Control Buttons -->
+  <div class="control-buttons">
+    <button id="enable-btn">ENABLE</button>
+    <button id="disable-btn">DISABLE</button>
+    <button id="estop-btn">E-STOP</button>
+  </div>
+
+  <!-- Mode Buttons -->
+  <div class="mode-buttons">
+    <button class="mode-btn" data-mode="teleop">Teleop</button>
+    <button class="mode-btn" data-mode="autonomous">Auto</button>
+    <button class="mode-btn" data-mode="test">Test</button>
+  </div>
+
+  <script src="frontend.js"></script>
+</body>
+</html>
