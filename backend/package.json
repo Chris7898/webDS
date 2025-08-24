@@ -1,18 +1,24 @@
 {
   "name": "webds-backend",
   "version": "1.0.0",
+  "description": "WebDS backend server (pkg single-file build)",
   "main": "launch.js",
-  "bin": "launch.js",
+  "type": "commonjs",
+  "private": true,
+  "license": "MIT",
   "scripts": {
-    "start": "node launch.js"
+    "start": "node launch.js",
+    "build:console": "pkg . --targets node18-win-x64 --output WebDS-Console.exe",
+    "build:exe": "pkg . --targets node18-win-x64 --output WebDS.exe"
   },
+  "bin": "launch.js",
   "dependencies": {
-    "open": "^9.1.0",
-    "ws": "^8.18.3"
+    "ws": "^8.17.0"
   },
   "pkg": {
-  "assets": ["deploy/**/*"],
-  "targets": ["node18-win-x64"]
-}
-
+    "targets": [ "node18-win-x64" ],
+    "outputPath": "dist",
+    "bin": "launch.js",
+    "assets": []
+  }
 }
