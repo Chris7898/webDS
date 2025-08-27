@@ -82,6 +82,7 @@
   }
 
   function startConnectTimeout() {
+      log('"Space" and "Enter" DO NOT WORK to disable the robot.')
     clearTimeout(connectTimeoutId);
     setConnState('connecting', 'Connecting…');
     connectTimeoutId = setTimeout(() => {
@@ -338,7 +339,7 @@
     logStream.innerHTML = '';
   });
 
-  log('"Space" and "Enter" DO NOT WORK to disable the robot.')
+
   // Auto-init
   loadPersistedTeam();
   setModeActive('teleop');
