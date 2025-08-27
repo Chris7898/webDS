@@ -338,6 +338,7 @@
     logStream.innerHTML = '';
   });
 
+  log('"Space" and "Enter" DO NOT WORK to disable the robot.')
   // Auto-init
   loadPersistedTeam();
   setModeActive('teleop');
