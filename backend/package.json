@@ -8,8 +8,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node launch.js",
-    "build:console": "pkg . --targets node18-win-x64 --output WebDS-Console.exe",
-    "build:exe": "pkg . --targets node18-win-x64 --output WebDS.exe"
+    "build:win": "pkg . --targets node18-win-x64 --output dist/WebDS.exe && mkdir -p release && powershell Compress-Archive -Path dist/WebDS.exe -DestinationPath release/WebDS-win-x64.zip",
+    
+    "build:mac": "pkg . --targets node18-macos-x64 --output dist/WebDS-mac-x64.app && pkg . --targets node18-macos-arm64 --output dist/WebDS-mac-arm64.app && mkdir -p release && zip -r release/WebDS-mac-x64.zip dist/WebDS-mac-x64.app && zip -r release/WebDS-mac-arm64.zip dist/WebDS-mac-arm64.app",
+    
+    "build:linux": "pkg . --targets node18-linux-x64 --output dist/WebDS-linux-x64.bin && pkg . --targets node18-linux-arm64 --output dist/WebDS-linux-arm64.bin && mkdir -p release && tar -czf release/WebDS-linux-x64.tar.gz -C dist WebDS-linux-x64.bin && tar -czf release/WebDS-linux-arm64.tar.gz -C dist WebDS-linux-arm64.bin",
+
+    "build:all": "npm run build:win && npm run build:mac && npm run build:linux"
+
   },
   "bin": "launch.js",
   "dependencies": {
