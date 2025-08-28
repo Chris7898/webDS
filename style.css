@@ -23,6 +23,11 @@ body{
   font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
+.logo {
+  width: 150px;  /* adjust size */
+  height: auto; /* keep aspect ratio */
+}
+
 .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
 .muted{color:var(--muted)}
 
