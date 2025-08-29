@@ -1,126 +1,137 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WebDS</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo-dot"></div>
-      <img src="assets/webdsmscotnobg.png" alt="WebDS Logo" class="logo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebDS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo-dot"></div>
+        <img src="assets/webdsmscotnobg.png" alt="WebDS Logo" class="logo" />
 
-      <!-- <h1>WebDS</h1> -->
-    </div>
+        <!-- <h1>WebDS</h1> -->
+      </div>
 
-    <div class="connection-cluster">
-      <div class="team-ip">
-        <label class="field">
-          <span>Team #</span>
-          <input id="teamInput" type="number" inputmode="numeric" min="1" placeholder="XXXX" />
-        </label>
-        <div class="ip-line">
-          <span class="muted">Robot IP:</span>
-          <span id="robotIp" class="mono">10.00.00.2</span>
+      <div class="connection-cluster">
+        <div class="team-ip">
+          <label class="field">
+            <span>Team #</span>
+            <input
+              id="teamInput"
+              type="number"
+              inputmode="numeric"
+              min="1"
+              placeholder="XXXX"
+            />
+          </label>
+          <div class="ip-line">
+            <span class="muted">Robot IP:</span>
+            <span id="robotIp" class="mono">10.00.00.2</span>
+          </div>
+        </div>
+
+        <div class="status-pill" id="connPill">
+          <span class="dot" id="connDot"></span>
+          <span id="connText">Disconnected</span>
+        </div>
+
+        <div class="connect-buttons">
+          <button id="connectBtn" class="btn ghost">Connect</button>
+          <button id="cancelBtn" class="btn ghost danger">Cancel</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- Popup -->
+      <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+          <h2>Do you accept?</h2>
+          <p>
+            SAFETY DISCLAIMER: By using this application you understand and
+            accept that not all safety features present in the official NI
+            Driver Station are present or will be present. This is provided
+            purely for experimentation while unable to utilize the NI Driver
+            Station.
+          </p>
+          <button id="acceptBtn">Accept</button>
+          <button id="declineBtn">Exit</button>
         </div>
       </div>
 
- 
-
-      <div class="status-pill" id="connPill">
-        <span class="dot" id="connDot"></span>
-        <span id="connText">Disconnected</span>
-      </div>
-
-      <div class="connect-buttons">
-        <button id="connectBtn" class="btn ghost">Connect</button>
-        <button id="cancelBtn" class="btn ghost danger">Cancel</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="content">
-     <!-- Popup -->
-     <div id="popup" class="popup-overlay">
-      <div class="popup-content">
-        <h2>Do you accept?</h2>
-          <p>SAFETY DISCLAIMER: 
-            By using this application you understand and accept that not all safety features present 
-            in the official NI Driver Station are present or will be present. This is provided purely 
-            for experimentation while unable to utilize the NI Driver Station. </p>
-        <button id="acceptBtn">Accept</button>
-    <button id="declineBtn">Exit</button>
-     </div>
-    </div>
-
-    <section class="controls card">
-      <div class="primary-actions">
-        <button id="enableBtn" class="btn xl success">Enable</button>
-        <button id="disableBtn" class="btn xl">Disable</button>
-        <button id="estopBtn" class="btn xl danger">E-STOP</button>
-      </div>
-
-      <div class="modes">
-        <button class="btn mode active" data-mode="teleop">Teleop</button>
-        <button class="btn mode" data-mode="autonomous">Autonomous</button>
-        <button class="btn mode" data-mode="test">Test</button>
-      </div>
-    </section>
-
-    <section class="status-grid">
-      <div class="card stat">
-        <div class="stat-label">Battery</div>
-        <div class="stat-value" id="batteryV">--.- V</div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Comms</div>
-        <div class="stat-indicator">
-          <span class="dot small" id="commsDot"></span>
-          <span id="commsText">No Link</span>
+      <section class="controls card">
+        <div class="primary-actions">
+          <button id="enableBtn" class="btn xl success">Enable</button>
+          <button id="disableBtn" class="btn xl">Disable</button>
+          <button id="estopBtn" class="btn xl danger">E-STOP</button>
         </div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Robot Code</div>
-        <div class="stat-indicator">
-          <span class="dot small" id="codeDot"></span>
-          <span id="codeText">Unknown</span>
-        </div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Latency</div>
-        <div class="stat-value" id="latencyMs">-- ms</div>
-      </div>
-      <div class="card stat">
-        <div class="stat-label">Packet Loss</div>
-        <div class="stat-value" id="lossPct">-- %</div>
-      </div>
-      <div class="card stat joystick-card">
-        <div class="stat-label">Joystick</div>
-        <div id="joystickDisplay" class="joystick-display">
-          <div id="axesDisplay" class="axes"></div>
-          <div id="buttonsDisplay" class="buttons"></div>
-        </div>
-      </div>
-    </section>
 
-    <section class="card log">
-      <div class="log-header">
-        <h3>Event Log</h3>
-        <div>
-          <button id="clearLogBtn" class="btn tiny ghost">Clear</button>
-          <button id="downloadLogBtn" class="btn tiny ghost accent">Download</button>
+        <div class="modes">
+          <button class="btn mode active" data-mode="teleop">Teleop</button>
+          <button class="btn mode" data-mode="autonomous">Autonomous</button>
+          <button class="btn mode" data-mode="test">Test</button>
         </div>
-      </div>
-      <div id="logStream" class="log-stream" aria-live="polite"></div>
-    </section>
-  </main>
+      </section>
 
-  <footer class="footer">
-    <span class="muted">Web-based Driver Station • v1.6</span>
-  </footer>
+      <section class="status-grid">
+        <div class="card stat">
+          <div class="stat-label">Battery</div>
+          <div class="stat-value" id="batteryV">--.- V</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-label">Comms</div>
+          <div class="stat-indicator">
+            <span class="dot small" id="commsDot"></span>
+            <span id="commsText">No Link</span>
+          </div>
+        </div>
+        <div class="card stat">
+          <div class="stat-label">Robot Code</div>
+          <div class="stat-indicator">
+            <span class="dot small" id="codeDot"></span>
+            <span id="codeText">Unknown</span>
+          </div>
+        </div>
+        <div class="card stat">
+          <div class="stat-label">Latency</div>
+          <div class="stat-value" id="latencyMs">-- ms</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-label">Packet Loss</div>
+          <div class="stat-value" id="lossPct">-- %</div>
+        </div>
+        <div class="card stat joystick-card">
+          <div class="stat-label">Joystick</div>
+          <div id="joystickDisplay" class="joystick-display">
+            <div id="axesDisplay" class="axes"></div>
+            <div id="buttonsDisplay" class="buttons"></div>
+          </div>
+        </div>
+      </section>
 
-  <script src="script.js"></script>
-</body>
+      <section class="card log">
+        <div class="log-header">
+          <h3>Event Log</h3>
+          <div>
+            <button id="clearLogBtn" class="btn tiny ghost">Clear</button>
+            <button id="downloadLogBtn" class="btn tiny ghost accent">
+              Download
+            </button>
+          </div>
+        </div>
+        <div id="logStream" class="log-stream" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="muted">Web-based Driver Station • v1.6</span>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="backend/shared/messages.js"></script>
+    <script src="backend/shared/robotState.js"></script>
+  </body>
 </html>
