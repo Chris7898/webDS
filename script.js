@@ -52,7 +52,7 @@
   // Show popup (call this whenever you want)
   function showPopup() {
     popup.classList.add('active');
-    document.body.style.overflow = 'hidden'; // prevent page scroll
+    document.body.style.overflow = 'auto'; // prevent page scroll
 }
 
 function hidePopup() {
