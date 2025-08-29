@@ -28,7 +28,7 @@ try {
   console.log(
     ROBOT_IP_OVERRIDE
       ? `🚀 Using override IP: ${robotAddress}`
-      : `🚀 Using team number ${TEAM_NUMBER} → ${robotAddress}`
+      : `🚀 Using team number ${TEAM_NUMBER} → ${robotAddress}`,
   );
 } catch (err) {
   console.error("❌ Startup failed:", err.message);
