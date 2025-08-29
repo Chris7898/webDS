@@ -28,6 +28,7 @@
   const popup = document.getElementById('popup');
   const acceptBtn = document.getElementById('acceptBtn');
   const declineBtn = document.getElementById('declineBtn');
+  const showPopupBtn = document.getElementById('showPopupBtn');
 
   // State
   let ws = null;
@@ -49,15 +50,16 @@
   const now = () => new Date();
   const ts = () => now().toLocaleTimeString();
 
-  // Show popup (call this whenever you want)
   function showPopup() {
+    originalOverflow = document.body.style.overflow;
     popup.classList.add('active');
-    document.body.style.overflow = 'auto'; // prevent page scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function hidePopup() {
     popup.classList.remove('active');
-    document.body.style.overflow = 'auto'; // restore scroll
+    document.body.style.overflow = originalOverflow;
+    localStorage.setItem('popupDismissed', 'true'); // mark as shown
 }
 
   // Accept button clicked
@@ -70,12 +72,19 @@ function hidePopup() {
   // Decline button clicked
   declineBtn.addEventListener('click', () => {
     popup.classList.remove('active');
-    log("You Clicked Exit! Unfortunately, we still will not be liable for any issues that occurred during the use of the WebDS project.");
+  window.location = "https://www.ni.com/en/support/downloads/drivers/download.frc-game-tools.html?srsltid=AfmBOooU5xxVVEt5dXOBapft2WQhnlLogObFARDtCx49sZGfLrO_XKA2"
+    // log("You Clicked Exit! Unfortunately, we still will not be liable for any issues that occurred during the use of the WebDS project.");
     
   });
 
   // Optional: Show popup automatically on page load
   window.addEventListener('load', showPopup);
+  window.addEventListener('remove', hidePopup);
+  showPopupBtn.addEventListener('click', showPopup);
+
+  if (!localStorage.getItem('popupDismissed')) {
+    showPopup();
+}
 
   function log(msg) {
     const el = document.createElement('div');
