@@ -25,6 +25,10 @@
   const logStream = document.getElementById('logStream');
   const clearLogBtn = document.getElementById('clearLogBtn');
 
+  const popup = document.getElementById('popup');
+  const acceptBtn = document.getElementById('acceptBtn');
+  const declineBtn = document.getElementById('declineBtn');
+
   // State
   let ws = null;
   let connectTimeoutId = null;
@@ -44,6 +48,34 @@
   };
   const now = () => new Date();
   const ts = () => now().toLocaleTimeString();
+
+  // Show popup (call this whenever you want)
+  function showPopup() {
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden'; // prevent page scroll
+}
+
+function hidePopup() {
+    popup.classList.remove('active');
+    document.body.style.overflow = 'auto'; // restore scroll
+}
+
+  // Accept button clicked
+  acceptBtn.addEventListener('click', () => {
+    popup.classList.remove('active');
+    log("You accepted. GLHF");
+    
+  });
+
+  // Decline button clicked
+  declineBtn.addEventListener('click', () => {
+    popup.classList.remove('active');
+    log("You Clicked Exit! Unfortunately, we still will not be liable for any issues that occurred during the use of the WebDS project.");
+    
+  });
+
+  // Optional: Show popup automatically on page load
+  window.addEventListener('load', showPopup);
 
   function log(msg) {
     const el = document.createElement('div');
@@ -82,7 +114,7 @@
   }
 
   function startConnectTimeout() {
-      log('"Space" and "Enter" DO NOT WORK to disable the robot.')
+    log('"Space" and "Enter" DO NOT WORK to disable the robot.')
     clearTimeout(connectTimeoutId);
     setConnState('connecting', 'Connecting…');
     connectTimeoutId = setTimeout(() => {
@@ -138,7 +170,7 @@
         const rtt = Date.now() - (data.clientTs || lastPingSent);
         rttSamples.push(rtt);
         if (rttSamples.length > 5) rttSamples.shift();
-        const avg = Math.round(rttSamples.reduce((a,b)=>a+b,0)/rttSamples.length);
+        const avg = Math.round(rttSamples.reduce((a, b) => a + b, 0) / rttSamples.length);
         latencyMs.textContent = `${avg} ms`;
       }
     };
@@ -228,79 +260,79 @@
     ws.send(JSON.stringify({ type: 'enable' }));
     log('Enable sent.');
   });
-(() => {
-  /* Existing variables and functions from previous script remain unchanged */
+  (() => {
+    /* Existing variables and functions from previous script remain unchanged */
 
-  const joystickDisplay = document.getElementById('joystickDisplay');
-  const axesDisplay = document.getElementById('axesDisplay');
-  const buttonsDisplay = document.getElementById('buttonsDisplay');
-  const downloadLogBtn = document.getElementById('downloadLogBtn');
+    const joystickDisplay = document.getElementById('joystickDisplay');
+    const axesDisplay = document.getElementById('axesDisplay');
+    const buttonsDisplay = document.getElementById('buttonsDisplay');
+    const downloadLogBtn = document.getElementById('downloadLogBtn');
 
-  // Joystick handling
-  let gamepads = {};
+    // Joystick handling
+    let gamepads = {};
 
-  function updateGamepads() {
-    const gps = navigator.getGamepads();
-    buttonsDisplay.innerHTML = '';
-    axesDisplay.innerHTML = '';
+    function updateGamepads() {
+      const gps = navigator.getGamepads();
+      buttonsDisplay.innerHTML = '';
+      axesDisplay.innerHTML = '';
 
-    for (let gp of gps) {
-      if (!gp) continue;
-      // Axes
-      gp.axes.forEach((val, i) => {
-        const axisEl = document.createElement('span');
-        axisEl.textContent = `Axis ${i}: ${val.toFixed(2)}`;
-        axesDisplay.appendChild(axisEl);
-      });
+      for (let gp of gps) {
+        if (!gp) continue;
+        // Axes
+        gp.axes.forEach((val, i) => {
+          const axisEl = document.createElement('span');
+          axisEl.textContent = `Axis ${i}: ${val.toFixed(2)}`;
+          axesDisplay.appendChild(axisEl);
+        });
 
-      // Buttons
-      gp.buttons.forEach((btn, i) => {
-        const btnEl = document.createElement('span');
-        btnEl.className = 'btn';
-        if (btn.pressed) btnEl.classList.add('pressed');
-        btnEl.textContent = i;
-        buttonsDisplay.appendChild(btnEl);
+        // Buttons
+        gp.buttons.forEach((btn, i) => {
+          const btnEl = document.createElement('span');
+          btnEl.className = 'btn';
+          if (btn.pressed) btnEl.classList.add('pressed');
+          btnEl.textContent = i;
+          buttonsDisplay.appendChild(btnEl);
 
-        if (btn.pressed) {
-          log(`Joystick button ${i} pressed`);
-          if (ws && ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ type: 'joystick', index: i, pressed: true }));
+          if (btn.pressed) {
+            log(`Joystick button ${i} pressed`);
+            if (ws && ws.readyState === WebSocket.OPEN) {
+              ws.send(JSON.stringify({ type: 'joystick', index: i, pressed: true }));
+            }
           }
-        }
-      });
+        });
+      }
     }
-  }
 
-  window.addEventListener("gamepadconnected", (e) => {
-    log(`Gamepad connected: ${e.gamepad.id}`);
-    gamepads[e.gamepad.index] = e.gamepad;
-  });
+    window.addEventListener("gamepadconnected", (e) => {
+      log(`Gamepad connected: ${e.gamepad.id}`);
+      gamepads[e.gamepad.index] = e.gamepad;
+    });
 
-  window.addEventListener("gamepaddisconnected", (e) => {
-    log(`Gamepad disconnected: ${e.gamepad.id}`);
-    delete gamepads[e.gamepad.index];
-  });
+    window.addEventListener("gamepaddisconnected", (e) => {
+      log(`Gamepad disconnected: ${e.gamepad.id}`);
+      delete gamepads[e.gamepad.index];
+    });
 
-  function gameLoop() {
-    updateGamepads();
+    function gameLoop() {
+      updateGamepads();
+      requestAnimationFrame(gameLoop);
+    }
     requestAnimationFrame(gameLoop);
-  }
-  requestAnimationFrame(gameLoop);
 
-  // Download log
-  downloadLogBtn.addEventListener('click', () => {
-    let logText = Array.from(logStream.children).map(e => e.textContent).join('\n');
-    const blob = new Blob([logText], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `WebDS-log-${new Date().toISOString()}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+    // Download log
+    downloadLogBtn.addEventListener('click', () => {
+      let logText = Array.from(logStream.children).map(e => e.textContent).join('\n');
+      const blob = new Blob([logText], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `WebDS-log-${new Date().toISOString()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
 
-  /* Rest of previous code remains unchanged: WebSocket connect, Enable/Disable/E-Stop, Modes, logging, ping, etc. */
-})();
+    /* Rest of previous code remains unchanged: WebSocket connect, Enable/Disable/E-Stop, Modes, logging, ping, etc. */
+  })();
 
   disableBtn.addEventListener('click', () => {
     if (!isConnected) {
