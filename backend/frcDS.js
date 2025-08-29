@@ -1,6 +1,7 @@
 const dgram = require("dgram");
 const fs = require("fs");
 const path = require("path");
+const robotState = require("./shared/robotState");
 
 class DriverStation {
   constructor() {
@@ -8,7 +9,7 @@ class DriverStation {
     this.team = 0;
     this.robotIP = "10.0.0.2";
     this.enabled = false;
-    this.mode = "teleop";
+    this.mode = robotState.RobotModeString.TELEOP;
     this.socket = dgram.createSocket("udp4");
     this.robotPort = 1110;
     this.dsPacketCounter = 0;
@@ -92,11 +93,11 @@ class DriverStation {
 
   modeToNumber(mode) {
     switch (mode) {
-      case "teleop":
+      case robotState.RobotModeString.TELEOP:
         return 0;
-      case "autonomous":
+      case robotState.RobotModeString.AUTONOMOUS:
         return 1;
-      case "test":
+      case robotState.RobotModeString.TEST:
         return 2;
       default:
         return 0;

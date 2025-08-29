@@ -1,9 +1,3 @@
-const RobotModeString = {
-  TELEOP: "teleop",
-  AUTONOMOUS: "autonomous",
-  TEST: "test",
-};
-
 const connectionState = {
   CONNECTED: "connected",
   DISCONNECTED: "disconnected",
