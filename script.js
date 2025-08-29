@@ -80,7 +80,7 @@ function hidePopup() {
   // Optional: Show popup automatically on page load
   window.addEventListener('load', showPopup);
   window.addEventListener('remove', hidePopup);
-  showPopupBtn.addEventListener('click', showPopup);
+  // showPopupBtn.addEventListener('click', showPopup);
 
   if (!localStorage.getItem('popupDismissed')) {
     showPopup();
