@@ -23,6 +23,49 @@ body{
   font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
+/* Overlay background */
+.popup-overlay {
+  position: fixed;  /* stays on top, doesn’t change page layout */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000; /* ensures it’s above everything */
+}
+
+.popup-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Popup box */
+.popup-content {
+  background: #000000;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.popup-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#acceptBtn { background-color: #4CAF50; color: white; }
+#declineBtn { background-color: #f44336; color: white; }
+
 .logo {
   width: 100px;  /* adjust size */
   height: auto; /* keep aspect ratio */

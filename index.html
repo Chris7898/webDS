@@ -27,6 +27,8 @@
         </div>
       </div>
 
+ 
+
       <div class="status-pill" id="connPill">
         <span class="dot" id="connDot"></span>
         <span id="connText">Disconnected</span>
@@ -40,6 +42,19 @@
   </header>
 
   <main class="content">
+     <!-- Popup -->
+     <div id="popup" class="popup-overlay">
+      <div class="popup-content">
+        <h2>Do you accept?</h2>
+          <p>SAFETY DISCLAIMER: 
+            By using this application you understand and accept that not all safety features present 
+            in the official NI Driver Station are present or will be present. This is provided purely 
+            for experimentation while unable to utilize the NI Driver Station. </p>
+        <button id="acceptBtn">Accept</button>
+    <button id="declineBtn">Exit</button>
+     </div>
+    </div>
+
     <section class="controls card">
       <div class="primary-actions">
         <button id="enableBtn" class="btn xl success">Enable</button>
@@ -103,7 +118,7 @@
   </main>
 
   <footer class="footer">
-    <span class="muted">Web-based Driver Station • v1.1</span>
+    <span class="muted">Web-based Driver Station • v1.3</span>
   </footer>
 
   <script src="script.js"></script>
