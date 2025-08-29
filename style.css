@@ -25,11 +25,11 @@ body{
 
 /* Overlay background */
 .popup-overlay {
-  position: fixed;  /* stays on top, doesn’t change page layout */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
@@ -37,7 +37,7 @@ body{
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 1000; /* ensures it’s above everything */
+  z-index: 1000;
 }
 
 .popup-overlay.active {
@@ -45,7 +45,7 @@ body{
   opacity: 1;
 }
 
-/* Popup box */
+/* Popup content */
 .popup-content {
   background: #000000;
   padding: 20px 30px;
