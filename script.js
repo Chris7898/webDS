@@ -53,12 +53,12 @@
   function showPopup() {
     originalOverflow = document.body.style.overflow;
     popup.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'auto';
 }
 
 function hidePopup() {
     popup.classList.remove('active');
-    document.body.style.overflow = originalOverflow;
+    document.body.style.overflow = 'auto';
     localStorage.setItem('popupDismissed', 'true'); // mark as shown
 }
 
